@@ -1,26 +1,25 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" app>
+    <v-navigation-drawer v-model="drawer" app color="background">
       <v-list>
         <v-list-item
-          prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
           :title="authStore.user?.username || 'Admin'"
-          subtitle="Administrador"
+          :subtitle="$t('administrator')"
         ></v-list-item>
       </v-list>
 
       <v-divider></v-divider>
 
-      <v-list density="compact" nav>
-        <v-list-item prepend-icon="mdi-view-dashboard" title="Dashboard" to="/admin/dashboard"></v-list-item>
-        <v-list-item prepend-icon="mdi-package-variant" title="Productos" to="/admin/products"></v-list-item>
-        <v-list-item prepend-icon="mdi-shape" title="Categorías" to="/admin/categories"></v-list-item>
+      <v-list density="compact" nav color="primary">
+        <v-list-item prepend-icon="mdi-view-dashboard" :title="$t('dashboard')" to="/admin/dashboard"></v-list-item>
+        <v-list-item prepend-icon="mdi-shoe-sneaker" :title="$t('products')" to="/admin/products"></v-list-item>
+        <v-list-item prepend-icon="mdi-tag-multiple" :title="$t('categories')" to="/admin/categories"></v-list-item>
       </v-list>
 
       <template v-slot:append>
         <div class="pa-2">
           <v-btn block color="error" @click="handleLogout">
-            Cerrar Sesión
+            {{ $t('logout') }}
           </v-btn>
         </div>
       </template>
@@ -28,7 +27,7 @@
 
     <v-app-bar app color="primary" dark>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>TechInventory Admin</v-toolbar-title>
+      <v-toolbar-title>{{ $t('admin_title') }}</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
@@ -52,3 +51,10 @@ const handleLogout = () => {
   authStore.logout();
 };
 </script>
+
+<style scoped>
+:deep(.v-list-item--active .v-list-item-title) {
+  color: #000000 !important;
+  font-weight: bold;
+}
+</style>

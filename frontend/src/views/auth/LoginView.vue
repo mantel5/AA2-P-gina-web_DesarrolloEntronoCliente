@@ -7,16 +7,16 @@
       <v-form @submit.prevent="handleLogin">
         <v-text-field
           v-model="username"
-          label="Usuario"
+          :label="$t('username')"
           name="username"
           prepend-icon="mdi-account"
           type="text"
           :error-messages="errors.username"
         ></v-text-field>
-        <v-text-field
+        <v-text-field   
           v-model="password"
           id="password"
-          label="Contraseña"
+          :label="$t('password')"
           name="password"
           prepend-icon="mdi-lock"
           type="password"
@@ -24,9 +24,11 @@
         ></v-text-field>
       </v-form>
     </v-card-text>
-    <v-card-actions>
-      <v-spacer></v-spacer>
-      <v-btn color="primary" @click="handleLogin" :loading="loading">Entrar</v-btn>
+    <v-card-actions class="d-flex flex-column">
+      <v-btn type="submit" color="primary" block :loading="loading" @click="handleLogin">{{ $t('login') }}</v-btn>
+      <v-btn variant="text" color="secondary" class="mt-2" to="/auth/register">
+        ¿No tienes cuenta? Regístrate aquí
+      </v-btn>
     </v-card-actions>
     <v-alert v-if="apiError" type="error" class="mt-3">{{ apiError }}</v-alert>
   </v-card>
@@ -60,22 +62,14 @@ const apiError = ref('');
 const handleLogin = handleSubmit(async (values) => {
   loading.value = true;
   apiError.value = '';
+  console.log('Submitting login form...', values);
   try {
-    const response = await fetch('http://localhost:3000/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(values)
-    });
-    
-    const data = await response.json();
-    if (!response.ok) {
-      throw new Error(data.error || 'Error al iniciar sesión');
-    }
-
-    authStore.login(data.user, data.token);
+    await authStore.login(values);
+    console.log('Login successful, redirecting to home...');
     router.push('/');
   } catch (err: any) {
-    apiError.value = err.message;
+    console.error('Login failed in view:', err);
+    apiError.value = err.message || 'Error al iniciar sesión. Revisa la consola.';
   } finally {
     loading.value = false;
   }

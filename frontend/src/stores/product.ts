@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
+import { HttpClient } from '../core/http-client';
 
 export const useProductStore = defineStore('product', () => {
     const products = ref([]);
@@ -9,9 +10,7 @@ export const useProductStore = defineStore('product', () => {
     async function fetchProducts() {
         loading.value = true;
         try {
-            const response = await fetch('http://localhost:3000/api/products');
-            if (!response.ok) throw new Error('Failed to fetch products');
-            products.value = await response.json();
+            products.value = await HttpClient.get('/products');
         } catch (err: any) {
             error.value = err.message;
         } finally {
@@ -22,12 +21,7 @@ export const useProductStore = defineStore('product', () => {
     async function createProduct(product: any) {
         loading.value = true;
         try {
-            const response = await fetch('http://localhost:3000/api/products', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(product)
-            });
-            if (!response.ok) throw new Error('Failed to create product');
+            await HttpClient.post('/products', product);
             await fetchProducts();
         } catch (err: any) {
             error.value = err.message;
@@ -40,12 +34,7 @@ export const useProductStore = defineStore('product', () => {
     async function updateProduct(id: number, product: any) {
         loading.value = true;
         try {
-            const response = await fetch(`http://localhost:3000/api/products/${id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(product)
-            });
-            if (!response.ok) throw new Error('Failed to update product');
+            await HttpClient.put(`/products/${id}`, product);
             await fetchProducts();
         } catch (err: any) {
             error.value = err.message;
@@ -58,10 +47,7 @@ export const useProductStore = defineStore('product', () => {
     async function deleteProduct(id: number) {
         loading.value = true;
         try {
-            const response = await fetch(`http://localhost:3000/api/products/${id}`, {
-                method: 'DELETE'
-            });
-            if (!response.ok) throw new Error('Failed to delete product');
+            await HttpClient.delete(`/products/${id}`);
             await fetchProducts();
         } catch (err: any) {
             error.value = err.message;

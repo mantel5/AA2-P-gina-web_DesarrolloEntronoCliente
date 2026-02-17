@@ -1,24 +1,3 @@
-# TechInventory - Proyecto Vue 3 (2ª Evaluación)
-
-Aplicación de Gestión de Inventario de Productos Tecnológicos desarrollada con Vue 3, Vuetify y Node.js.
-
-## Credenciales de Prueba
-
-Para acceder al panel de administración, puedes registrar un nuevo usuario o usar las siguientes credenciales (si ya existen en la BD):
-
-- **Usuario**: `admin`
-- **Contraseña**: `123456`
-
-> **Nota**: Al iniciar la aplicación por primera vez, la base de datos estará vacía. Debes registrarte primero en `/auth/register`.
-
-## Cómo Ejecutar
-
-La aplicación está dockerizada para facilitar su despliegue.
-
-### Requisitos
-
-- Docker y Docker Compose instalados.
-
 ### Pasos
 
 1.  Abrir una terminal en la raíz del proyecto.

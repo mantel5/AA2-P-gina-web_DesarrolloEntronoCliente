@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
+import { HttpClient } from '../core/http-client';
 
 export const useCategoryStore = defineStore('category', () => {
     const categories = ref([]);
@@ -9,9 +10,7 @@ export const useCategoryStore = defineStore('category', () => {
     async function fetchCategories() {
         loading.value = true;
         try {
-            const response = await fetch('http://localhost:3000/api/categories');
-            if (!response.ok) throw new Error('Failed to fetch categories');
-            categories.value = await response.json();
+            categories.value = await HttpClient.get('/categories');
         } catch (err: any) {
             error.value = err.message;
         } finally {
@@ -22,12 +21,7 @@ export const useCategoryStore = defineStore('category', () => {
     async function createCategory(category: any) {
         loading.value = true;
         try {
-            const response = await fetch('http://localhost:3000/api/categories', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(category)
-            });
-            if (!response.ok) throw new Error('Failed to create category');
+            await HttpClient.post('/categories', category);
             await fetchCategories();
         } catch (err: any) {
             error.value = err.message;
@@ -40,12 +34,7 @@ export const useCategoryStore = defineStore('category', () => {
     async function updateCategory(id: number, category: any) {
         loading.value = true;
         try {
-            const response = await fetch(`http://localhost:3000/api/categories/${id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(category)
-            });
-            if (!response.ok) throw new Error('Failed to update category');
+            await HttpClient.put(`/categories/${id}`, category);
             await fetchCategories();
         } catch (err: any) {
             error.value = err.message;
@@ -58,10 +47,7 @@ export const useCategoryStore = defineStore('category', () => {
     async function deleteCategory(id: number) {
         loading.value = true;
         try {
-            const response = await fetch(`http://localhost:3000/api/categories/${id}`, {
-                method: 'DELETE'
-            });
-            if (!response.ok) throw new Error('Failed to delete category');
+            await HttpClient.delete(`/categories/${id}`);
             await fetchCategories();
         } catch (err: any) {
             error.value = err.message;

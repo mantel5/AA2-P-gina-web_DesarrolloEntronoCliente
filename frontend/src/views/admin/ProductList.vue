@@ -3,7 +3,19 @@
     <v-row>
       <v-col class="d-flex justify-space-between align-center">
         <h1 class="text-h4">{{ $t('manage_products') }}</h1>
-        <v-btn color="primary" @click="openDialog()">{{ $t('new_product') }}</v-btn>
+        <div class="d-flex align-center">
+          <v-text-field
+            v-model="search"
+            prepend-inner-icon="mdi-magnify"
+            label="Buscar..."
+            single-line
+            hide-details
+            density="compact"
+            class="mr-4"
+            style="width: 250px"
+          ></v-text-field>
+          <v-btn color="primary" @click="openDialog()">{{ $t('new_product') }}</v-btn>
+        </div>
       </v-col>
     </v-row>
 
@@ -12,7 +24,7 @@
     <v-row>
       <v-col>
         <ProductTable 
-          :products="productStore.products" 
+          :products="filteredProducts" 
           @edit="openDialog" 
           @delete="deleteProduct" 
         />
@@ -88,7 +100,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useProductStore } from '../../stores/product';
 import { useCategoryStore } from '../../stores/category';
 import ProductTable from '../../components/ProductTable.vue';
@@ -102,6 +114,15 @@ const productStore = useProductStore();
 const categoryStore = useCategoryStore();
 const dialog = ref(false);
 const editedId = ref<number | null>(null);
+const search = ref('');
+
+const filteredProducts = computed(() => {
+  if (!search.value) return productStore.products;
+  const searchTerm = search.value.toLowerCase();
+  return productStore.products.filter((product: any) => 
+    product.name.toLowerCase().includes(searchTerm)
+  );
+});
 
 // Validation Schema
 const schema = yup.object({

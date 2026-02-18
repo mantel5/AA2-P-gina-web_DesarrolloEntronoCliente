@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col class="d-flex justify-space-between align-center">
-        <h1>{{ $t('manage_products') }}</h1>
+        <h1 class="text-h4">{{ $t('manage_products') }}</h1>
         <v-btn color="primary" @click="openDialog()">{{ $t('new_product') }}</v-btn>
       </v-col>
     </v-row>

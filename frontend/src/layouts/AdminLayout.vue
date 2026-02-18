@@ -53,8 +53,15 @@ const handleLogout = () => {
 </script>
 
 <style scoped>
-:deep(.v-list-item--active .v-list-item-title) {
+/* Light Theme: Force Black Text for Active Links */
+:deep(.v-theme--sneakerLight) .v-list-item--active .v-list-item-title {
   color: #000000 !important;
+  font-weight: bold;
+}
+
+/* Dark Theme: Ensure Visible Text (Primary) for Active Links */
+:deep(.v-theme--sneakerDark) .v-list-item--active .v-list-item-title {
+  color: #00E5FF !important; /* Neon Turquoise */
   font-weight: bold;
 }
 </style>

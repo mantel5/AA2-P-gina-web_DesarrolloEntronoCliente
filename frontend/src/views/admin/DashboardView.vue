@@ -71,7 +71,7 @@ const stockData = computed(() => {
   return {
     labels,
     datasets: [{
-      backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16', '#ffcf56'],
+      backgroundColor: ['#00E5FF', '#00B8D4', '#18FFFF', '#455A64', '#B0BEC5'], // Theme palette
       data
     }]
   };
@@ -82,17 +82,16 @@ const doughnutOptions = {
   maintainAspectRatio: false
 };
 
-// Chart 3: Mock Sales Trend (Line Chart) - Filtered by Date (Mock logic)
+// Chart 3: Mock Sales Trend (Line Chart)
 const salesData = computed(() => {
-  // Mock data that changes "slightly" based on filter date just to show reactivity
-  const seed = new Date(filterDate.value).getDate();
   return {
     labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'],
     datasets: [{
-      label: 'Ventas Mensuales', // Could be added to i18n
-      backgroundColor: '#f87979',
-      borderColor: '#f87979',
-      data: [40 + seed, 39, 10, 40, 39, 80, 40]
+      label: 'Ventas Mensuales',
+      backgroundColor: 'rgba(0, 229, 255, 0.2)', // Transparent Turquoise
+      borderColor: '#00E5FF', // Neon Turquoise
+      pointBackgroundColor: '#FFFFFF',
+      data: [45, 52, 38, 65, 48, 70, 55] // Static mock data
     }]
   };
 });
@@ -105,11 +104,11 @@ const lineOptions = {
 
 <template>
   <v-container>
-    <h1>{{ $t('dashboard') }}</h1>
+    <h1 class="text-h4 mb-4">{{ $t('dashboard') }}</h1>
     
     <!-- KPI Cards -->
     <v-row class="mt-4">
-      <v-col cols="12" md="4">
+      <v-col cols="12" md="6">
         <v-card color="secondary" dark>
           <v-card-title>{{ $t('products') }}</v-card-title>
           <v-card-text class="text-h4">
@@ -117,18 +116,12 @@ const lineOptions = {
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="12" md="4">
+      <v-col cols="12" md="6">
         <v-card color="secondary" dark>
           <v-card-title>{{ $t('categories') }}</v-card-title>
           <v-card-text class="text-h4">
             {{ categoryStore.categories.length }}
           </v-card-text>
-        </v-card>
-      </v-col>
-      <v-col cols="12" md="4">
-        <v-card>
-          <v-card-title>Filtro de Fecha</v-card-title>
-          <v-text-field type="date" v-model="filterDate" label="Seleccionar Fecha"></v-text-field>
         </v-card>
       </v-col>
     </v-row>

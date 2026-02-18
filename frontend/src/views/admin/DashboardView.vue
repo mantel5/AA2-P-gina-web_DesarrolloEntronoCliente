@@ -84,6 +84,14 @@ const doughnutOptions = {
 
 // Chart 3: Mock Sales Trend (Line Chart)
 const salesData = computed(() => {
+  // Create a pseudo-random effect based on the selected date string
+  const dateStr = filterDate.value || '';
+  const day = parseInt(dateStr.split('-')[2] || '1');
+  const month = parseInt(dateStr.split('-')[1] || '1');
+  
+  // Generate distinct data based on the chosen date
+  const baseValue = (day * 5) + (month * 10);
+  
   return {
     labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'],
     datasets: [{
@@ -91,7 +99,16 @@ const salesData = computed(() => {
       backgroundColor: 'rgba(0, 229, 255, 0.2)', // Transparent Turquoise
       borderColor: '#00E5FF', // Neon Turquoise
       pointBackgroundColor: '#FFFFFF',
-      data: [45, 52, 38, 65, 48, 70, 55] // Static mock data
+      // Data changes drastically based on date
+      data: [
+        baseValue % 100, 
+        (baseValue + 20) % 100, 
+        (baseValue + 50) % 100, 
+        (baseValue + 10) % 100, 
+        (baseValue + 80) % 100, 
+        (baseValue + 30) % 100, 
+        (baseValue + 60) % 100
+      ]
     }]
   };
 });
@@ -108,7 +125,7 @@ const lineOptions = {
     
     <!-- KPI Cards -->
     <v-row class="mt-4">
-      <v-col cols="12" md="6">
+      <v-col cols="12" md="4">
         <v-card color="secondary" dark>
           <v-card-title>{{ $t('products') }}</v-card-title>
           <v-card-text class="text-h4">
@@ -116,11 +133,26 @@ const lineOptions = {
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="12" md="6">
+      <v-col cols="12" md="4">
         <v-card color="secondary" dark>
           <v-card-title>{{ $t('categories') }}</v-card-title>
           <v-card-text class="text-h4">
             {{ categoryStore.categories.length }}
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="12" md="4">
+        <v-card color="secondary" dark>
+          <v-card-title>Filtro de Fecha</v-card-title>
+          <v-card-text>
+            <v-text-field 
+              type="date" 
+              v-model="filterDate" 
+              label="Seleccionar Fecha"
+              bg-color="secondary"
+              density="compact"
+              hide-details
+            ></v-text-field>
           </v-card-text>
         </v-card>
       </v-col>

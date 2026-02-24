@@ -9,6 +9,12 @@ const router = createRouter({
             component: () => import('../views/HomeView.vue')
         },
         {
+            path: '/shop',
+            name: 'shop',
+            component: () => import('../views/ShopView.vue'),
+            meta: { requiresAuth: true }
+        },
+        {
             path: '/auth',
             component: () => import('../layouts/AuthLayout.vue'),
             children: [
@@ -31,7 +37,7 @@ const router = createRouter({
         {
             path: '/admin',
             component: () => import('../layouts/AdminLayout.vue'),
-            meta: { requiresAuth: true },
+            meta: { requiresAuth: true, requiresAdmin: true },
             children: [
                 {
                     path: 'dashboard',
@@ -57,11 +63,20 @@ import { useAuthStore } from '../stores/auth'
 
 router.beforeEach((to, _from, next) => {
     const authStore = useAuthStore()
+
+    // First line of defense: Authentication
     if (to.meta.requiresAuth && !authStore.token) {
         next('/auth/login')
-    } else {
-        next()
+        return
     }
+
+    // Second line of defense: Authorization (Role Admin)
+    if (to.meta.requiresAdmin && authStore.user?.role !== 'admin') {
+        next('/') // Redirect non-admins to home
+        return
+    }
+
+    next()
 })
 
 export default router

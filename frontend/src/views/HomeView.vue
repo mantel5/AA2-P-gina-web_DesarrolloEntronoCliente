@@ -13,6 +13,7 @@ const authStore = useAuthStore();
       <h2 class="text-h5 mb-6">Hola, {{ authStore.user.username }}</h2>
       <div class="d-flex gap-4 justify-center">
         <v-btn
+          v-if="authStore.user.role === 'admin'"
           color="primary"
           size="x-large"
           variant="flat"
@@ -21,6 +22,18 @@ const authStore = useAuthStore();
           prepend-icon="mdi-view-dashboard"
         >
           {{ $t('dashboard') }}
+        </v-btn>
+
+        <v-btn
+          v-if="authStore.user.role === 'user'"
+          color="secondary"
+          size="x-large"
+          variant="flat"
+          to="/shop"
+          class="mr-4"
+          prepend-icon="mdi-store"
+        >
+          Ir a la Tienda
         </v-btn>
         
         <v-btn

@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { HttpClient } from '../core/http-client';
 
 export const useProductStore = defineStore('product', () => {
-    const products = ref([]);
+    const products = ref<any[]>([]);
     const loading = ref(false);
     const error = ref('');
 

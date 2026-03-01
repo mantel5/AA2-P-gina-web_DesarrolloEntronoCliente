@@ -19,6 +19,7 @@ docker-compose up --build
 ## Funcionalidades
 
 - **Autenticación**: Registro y Login con JWT.
+  - *Credenciales de prueba de Administrador*: Usuario: `admin` | Contraseña: `admin`
 - **Gestión de Productos**: CRUD completo con imágenes y asignación de categoría.
 - **Gestión de Categorías**: CRUD completo.
 - **Dashboard**: Vista general del administrador.

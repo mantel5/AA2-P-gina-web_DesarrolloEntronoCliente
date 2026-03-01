@@ -30,6 +30,8 @@
     <v-main>
       <router-view />
     </v-main>
+
+    <AppFooter />
   </v-app>
 </template>
 
@@ -37,6 +39,7 @@
 import { useTheme } from 'vuetify';
 import { useI18n } from 'vue-i18n';
 import { computed } from 'vue';
+import AppFooter from './components/AppFooter.vue';
 
 const theme = useTheme();
 const { locale } = useI18n();

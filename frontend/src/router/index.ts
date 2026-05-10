@@ -35,6 +35,18 @@ const router = createRouter({
             redirect: '/auth/login'
         },
         {
+            path: '/cart',
+            name: 'cart',
+            component: () => import('../views/CartView.vue'),
+            meta: { requiresAuth: true }
+        },
+        {
+            path: '/my-orders',
+            name: 'my-orders',
+            component: () => import('../views/UserOrdersView.vue'),
+            meta: { requiresAuth: true }
+        },
+        {
             path: '/admin',
             component: () => import('../layouts/AdminLayout.vue'),
             meta: { requiresAuth: true, requiresAdmin: true },
@@ -53,6 +65,11 @@ const router = createRouter({
                     path: 'products',
                     name: 'products',
                     component: () => import('../views/admin/ProductList.vue')
+                },
+                {
+                    path: 'orders',
+                    name: 'admin-orders',
+                    component: () => import('../views/admin/AdminOrdersView.vue')
                 }
             ]
         }

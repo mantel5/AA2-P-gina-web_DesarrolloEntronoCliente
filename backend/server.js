@@ -14,9 +14,10 @@ app.use(express.json());
 app.use('/api/auth', require('./src/routes/auth.routes'));
 app.use('/api/products', require('./src/routes/product.routes'));
 app.use('/api/categories', require('./src/routes/category.routes'));
+app.use('/api/orders', require('./src/routes/order.routes'));
 
 app.get('/', (req, res) => {
-    res.json({ message: 'API TechInventory Running' });
+    res.json({ message: 'SneakerDrop API Running' });
 });
 
 // Start server

@@ -2,9 +2,11 @@
 import { onMounted, computed, ref } from 'vue';
 import { useProductStore } from '../stores/product';
 import { useCategoryStore } from '../stores/category';
+import { useCartStore } from '../stores/cart';
 
 const productStore = useProductStore();
 const categoryStore = useCategoryStore();
+const cartStore = useCartStore();
 const search = ref('');
 
 onMounted(async () => {
@@ -33,7 +35,22 @@ const getCategoryName = (categoryId: number) => {
   <v-container>
     <div class="d-flex justify-space-between align-center mb-6">
       <h1 class="text-h4 text-primary">Catálogo Web</h1>
-      <v-btn color="secondary" variant="outlined" to="/">Volver al Inicio</v-btn>
+      <div class="d-flex ga-3 align-center">
+        <v-btn variant="text" prepend-icon="mdi-arrow-left" to="/">Inicio</v-btn>
+        <v-btn to="/my-orders" variant="outlined" prepend-icon="mdi-package-variant-closed">
+          Mis Pedidos
+        </v-btn>
+        <v-btn to="/cart" color="primary" variant="flat">
+          <v-icon>mdi-cart</v-icon>
+          <v-badge
+            v-if="cartStore.itemCount > 0"
+            :content="cartStore.itemCount"
+            color="error"
+            floating
+          />
+          <span class="ml-2">Carrito ({{ cartStore.itemCount }})</span>
+        </v-btn>
+      </div>
     </div>
 
     <!-- Search Bar -->
@@ -109,6 +126,7 @@ const getCategoryName = (categoryId: number) => {
               block 
               prepend-icon="mdi-cart-plus"
               :disabled="product.stock <= 0"
+              @click="cartStore.addToCart({ productId: product.id, productName: product.name, unitPrice: product.price, image: product.image })"
             >
               {{ product.stock > 0 ? 'Añadir al Carrito' : 'Agotado' }}
             </v-btn>

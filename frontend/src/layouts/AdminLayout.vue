@@ -14,6 +14,7 @@
         <v-list-item prepend-icon="mdi-view-dashboard" :title="$t('dashboard')" to="/admin/dashboard"></v-list-item>
         <v-list-item prepend-icon="mdi-shoe-sneaker" :title="$t('products')" to="/admin/products"></v-list-item>
         <v-list-item prepend-icon="mdi-tag-multiple" :title="$t('categories')" to="/admin/categories"></v-list-item>
+        <v-list-item prepend-icon="mdi-clipboard-list-outline" title="Pedidos" to="/admin/orders"></v-list-item>
       </v-list>
 
       <template v-slot:append>

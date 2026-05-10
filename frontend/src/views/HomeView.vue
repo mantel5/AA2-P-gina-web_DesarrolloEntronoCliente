@@ -35,6 +35,30 @@ const authStore = useAuthStore();
         >
           Ir a la Tienda
         </v-btn>
+
+        <v-btn
+          v-if="authStore.user.role === 'user'"
+          color="primary"
+          size="x-large"
+          variant="tonal"
+          to="/cart"
+          class="mr-4"
+          prepend-icon="mdi-cart-outline"
+        >
+          Mi Carrito
+        </v-btn>
+
+        <v-btn
+          v-if="authStore.user.role === 'user'"
+          color="primary"
+          size="x-large"
+          variant="tonal"
+          to="/my-orders"
+          class="mr-4"
+          prepend-icon="mdi-package-variant-closed"
+        >
+          Mis Pedidos
+        </v-btn>
         
         <v-btn
           color="error"

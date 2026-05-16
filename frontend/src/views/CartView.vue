@@ -16,7 +16,6 @@ async function handleCheckout() {
     checkoutError.value = '';
     try {
         await orderStore.checkoutCart();
-        // Redirect to the order history page after a successful checkout
         router.push('/my-orders');
     } catch (err: any) {
         checkoutError.value = err.message || 'Error al procesar el pedido.';

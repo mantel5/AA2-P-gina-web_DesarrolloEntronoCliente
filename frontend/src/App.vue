@@ -4,12 +4,10 @@
       <v-toolbar-title>Gestión Comercial</v-toolbar-title>
       <v-spacer></v-spacer>
       
-      <!-- Theme Switcher -->
       <v-btn icon @click="toggleTheme">
         <v-icon>{{ theme.global.current.value.dark ? 'mdi-weather-sunny' : 'mdi-weather-night' }}</v-icon>
       </v-btn>
 
-      <!-- Locale Switcher -->
       <v-menu>
         <template v-slot:activator="{ props }">
           <v-btn v-bind="props">
@@ -56,7 +54,6 @@ const changeLocale = (lang: string) => {
 </script>
 
 <style>
-/* Global override for SweetAlert2 z-index */
 .swal2-container {
   z-index: 9999 !important;
 }

@@ -90,8 +90,8 @@ const messages = {
 };
 
 const i18n = createI18n({
-    legacy: false, // Use Composition API
-    locale: 'es', // Default locale
+    legacy: false,
+    locale: 'es',
     fallbackLocale: 'en',
     messages,
 });

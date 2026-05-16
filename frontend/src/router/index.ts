@@ -81,15 +81,13 @@ import { useAuthStore } from '../stores/auth'
 router.beforeEach((to, _from, next) => {
     const authStore = useAuthStore()
 
-    // First line of defense: Authentication
     if (to.meta.requiresAuth && !authStore.token) {
         next('/auth/login')
         return
     }
 
-    // Second line of defense: Authorization (Role Admin)
     if (to.meta.requiresAdmin && authStore.user?.role !== 'admin') {
-        next('/') // Redirect non-admins to home
+        next('/')
         return
     }
 

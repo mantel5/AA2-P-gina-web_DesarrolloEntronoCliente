@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 
-// Represents one line in the cart
 export interface CartItem {
     productId: number;
     productName: string;
@@ -11,18 +10,14 @@ export interface CartItem {
 }
 
 export const useCartStore = defineStore('cart', () => {
-    // ---------- State ----------
-    // We initialise from sessionStorage so the cart survives page refreshes
-    // but clears when the browser tab is closed (feels natural for shopping)
+
     const storedCart = sessionStorage.getItem('cart');
     const items = ref<CartItem[]>(storedCart ? JSON.parse(storedCart) : []);
 
-    // ---------- Helpers ----------
     function _persist() {
         sessionStorage.setItem('cart', JSON.stringify(items.value));
     }
 
-    // ---------- Getters ----------
     const itemCount = computed(() =>
         items.value.reduce((sum, item) => sum + item.quantity, 0)
     );
@@ -31,7 +26,6 @@ export const useCartStore = defineStore('cart', () => {
         items.value.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0)
     );
 
-    // ---------- Actions ----------
     function addToCart(product: Omit<CartItem, 'quantity'>) {
         const existing = items.value.find(i => i.productId === product.productId);
         if (existing) {

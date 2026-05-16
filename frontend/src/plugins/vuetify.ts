@@ -1,14 +1,10 @@
-// Styles
 import '@mdi/font/css/materialdesignicons.css'
-// @ts-ignore
 import 'vuetify/styles'
 
-// Composables
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
-// https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
   components,
   directives,
@@ -18,10 +14,10 @@ export default createVuetify({
       sneakerLight: {
         dark: false,
         colors: {
-          background: '#CFD8DC', // Gris Azulado Medio (Blue Grey Lighten-4)
+          background: '#CFD8DC',
           surface: '#FFFFFF',
-          primary: '#00E5FF', // Turquesa Neón
-          secondary: '#455A64', // Gris intermedio para contraste
+          primary: '#00E5FF',
+          secondary: '#455A64',
           error: '#D50000',
           info: '#2196F3',
           success: '#4CAF50',
@@ -31,9 +27,9 @@ export default createVuetify({
       sneakerDark: {
         dark: true,
         colors: {
-          background: '#000000', // Negro Puro
-          surface: '#121212', // Gris muy oscuro para tarjetas
-          primary: '#00E5FF', // Turquesa Neón
+          background: '#000000',
+          surface: '#121212',
+          primary: '#00E5FF',
           secondary: '#B0BEC5',
         },
       },

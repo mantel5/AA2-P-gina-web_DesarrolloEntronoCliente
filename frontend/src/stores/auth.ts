@@ -1,12 +1,9 @@
-// @ts-ignore
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-// @ts-ignore
 import { HttpClient } from '../core/http-client';
 
 export const useAuthStore = defineStore('auth', () => {
-    // Safe initialization from localStorage
     const storedUser = localStorage.getItem('user');
     let parsedUser = null;
     try {

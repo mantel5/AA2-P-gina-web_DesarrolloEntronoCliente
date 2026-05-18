@@ -41,7 +41,6 @@ import * as yup from 'yup';
 import { useAuthStore } from '../../stores/auth';
 import { useRouter } from 'vue-router';
 
-// Validation Schema
 const schema = yup.object({
   username: yup.string().required('El usuario es obligatorio'),
   password: yup.string().required('La contraseña es obligatoria')
@@ -62,13 +61,10 @@ const apiError = ref('');
 const handleLogin = handleSubmit(async (values) => {
   loading.value = true;
   apiError.value = '';
-  console.log('Submitting login form...', values);
   try {
     await authStore.login(values);
-    console.log('Login successful, redirecting to home...');
     router.push('/');
   } catch (err: any) {
-    console.error('Login failed in view:', err);
     apiError.value = err.message || 'Error al iniciar sesión. Revisa la consola.';
   } finally {
     loading.value = false;

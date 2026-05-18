@@ -41,7 +41,6 @@ onMounted(async () => {
   ]);
 });
 
-// Chart 1: Products per Category (Bar Chart)
 const productsPerCategoryData = computed(() => {
   const labels = categoryStore.categories.map((c: any) => c.name);
   const data = categoryStore.categories.map((c: any) => {
@@ -52,7 +51,7 @@ const productsPerCategoryData = computed(() => {
     labels,
     datasets: [{
       label: t('products'),
-      backgroundColor: '#00E5FF', // Sneaker Turquoise
+      backgroundColor: '#00E5FF',
       data
     }]
   };
@@ -63,15 +62,14 @@ const barOptions = {
   maintainAspectRatio: false
 };
 
-// Chart 2: Stock Distribution (Doughnut Chart)
 const stockData = computed(() => {
-  const labels = productStore.products.map((p: any) => p.name).slice(0, 5); // Top 5 products
+  const labels = productStore.products.map((p: any) => p.name).slice(0, 5);
   const data = productStore.products.map((p: any) => p.stock).slice(0, 5);
   
   return {
     labels,
     datasets: [{
-      backgroundColor: ['#00E5FF', '#00B8D4', '#18FFFF', '#455A64', '#B0BEC5'], // Theme palette
+      backgroundColor: ['#00E5FF', '#00B8D4', '#18FFFF', '#455A64', '#B0BEC5'],
       data
     }]
   };
@@ -82,24 +80,20 @@ const doughnutOptions = {
   maintainAspectRatio: false
 };
 
-// Chart 3: Mock Sales Trend (Line Chart)
 const salesData = computed(() => {
-  // Create a pseudo-random effect based on the selected date string
   const dateStr = filterDate.value || '';
   const day = parseInt(dateStr.split('-')[2] || '1');
   const month = parseInt(dateStr.split('-')[1] || '1');
   
-  // Generate distinct data based on the chosen date
   const baseValue = (day * 5) + (month * 10);
   
   return {
     labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'],
     datasets: [{
       label: 'Ventas Mensuales',
-      backgroundColor: 'rgba(0, 229, 255, 0.2)', // Transparent Turquoise
-      borderColor: '#00E5FF', // Neon Turquoise
+      backgroundColor: 'rgba(0, 229, 255, 0.2)',
+      borderColor: '#00E5FF',
       pointBackgroundColor: '#FFFFFF',
-      // Data changes drastically based on date
       data: [
         baseValue % 100, 
         (baseValue + 20) % 100, 
@@ -123,7 +117,6 @@ const lineOptions = {
   <v-container>
     <h1 class="text-h4 mb-4">{{ $t('dashboard') }}</h1>
     
-    <!-- KPI Cards -->
     <v-row class="mt-4">
       <v-col cols="12" md="4">
         <v-card color="secondary" dark>
@@ -158,7 +151,6 @@ const lineOptions = {
       </v-col>
     </v-row>
 
-    <!-- Charts -->
     <v-row class="mt-6">
       <v-col cols="12" md="6">
         <v-card>

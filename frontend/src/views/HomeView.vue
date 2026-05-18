@@ -8,7 +8,6 @@ const authStore = useAuthStore();
     <h1 class="text-h2 mb-4 text-primary">SneakerDrop</h1>
     <p class="text-h5 mb-8 text-medium-emphasis">{{ $t('home_subtitle') }}</p>
     
-    <!-- User Logged In -->
     <div v-if="authStore.user" class="text-center">
       <h2 class="text-h5 mb-6">Hola, {{ authStore.user.username }}</h2>
       <div class="d-flex gap-4 justify-center">
@@ -35,6 +34,30 @@ const authStore = useAuthStore();
         >
           Ir a la Tienda
         </v-btn>
+
+        <v-btn
+          v-if="authStore.user.role === 'user'"
+          color="primary"
+          size="x-large"
+          variant="tonal"
+          to="/cart"
+          class="mr-4"
+          prepend-icon="mdi-cart-outline"
+        >
+          Mi Carrito
+        </v-btn>
+
+        <v-btn
+          v-if="authStore.user.role === 'user'"
+          color="primary"
+          size="x-large"
+          variant="tonal"
+          to="/my-orders"
+          class="mr-4"
+          prepend-icon="mdi-package-variant-closed"
+        >
+          Mis Pedidos
+        </v-btn>
         
         <v-btn
           color="error"
@@ -48,7 +71,6 @@ const authStore = useAuthStore();
       </div>
     </div>
 
-    <!-- User NOT Logged In -->
     <div v-else class="d-flex gap-4">
       <v-btn
         color="primary"

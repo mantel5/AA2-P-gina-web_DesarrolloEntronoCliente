@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import { onMounted, computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useProductStore } from '../stores/product';
 import { useCategoryStore } from '../stores/category';
+import { useCartStore } from '../stores/cart';
+
+const { t } = useI18n();
 
 const productStore = useProductStore();
 const categoryStore = useCategoryStore();
+const cartStore = useCartStore();
 const search = ref('');
 
 onMounted(async () => {
@@ -32,16 +37,32 @@ const getCategoryName = (categoryId: number) => {
 <template>
   <v-container>
     <div class="d-flex justify-space-between align-center mb-6">
-      <h1 class="text-h4 text-primary">Catálogo Web</h1>
-      <v-btn color="secondary" variant="outlined" to="/">Volver al Inicio</v-btn>
+      <h1 class="text-h4 text-primary">{{ $t('shop_title') }}</h1>
+      <div class="d-flex ga-3 align-center">
+        <v-btn variant="text" prepend-icon="mdi-arrow-left" to="/">{{ $t('shop_go_home') }}</v-btn>
+        <v-btn to="/my-orders" variant="outlined" prepend-icon="mdi-package-variant-closed">
+          {{ $t('shop_my_orders') }}
+        </v-btn>
+        <v-btn to="/cart" color="primary" variant="flat">
+          <v-badge
+            v-if="cartStore.itemCount > 0"
+            :content="cartStore.itemCount"
+            color="error"
+            floating
+          >
+            <v-icon>mdi-cart</v-icon>
+          </v-badge>
+          <v-icon v-else>mdi-cart</v-icon>
+          <span class="ml-2">{{ $t('shop_cart_btn') }}</span>
+        </v-btn>
+      </div>
     </div>
 
-    <!-- Search Bar -->
     <v-row>
       <v-col cols="12" md="6" lg="4">
         <v-text-field
           v-model="search"
-          label="Buscar zapatillas..."
+          :label="$t('shop_search_placeholder')"
           prepend-inner-icon="mdi-magnify"
           variant="outlined"
           density="comfortable"
@@ -61,11 +82,10 @@ const getCategoryName = (categoryId: number) => {
     <v-row v-else-if="filteredProducts.length === 0">
       <v-col cols="12" class="text-center py-12">
         <v-icon size="64" color="grey-lighten-1" class="mb-4">mdi-shoe-sneaker</v-icon>
-        <h3 class="text-h6 text-grey">No se encontraron zapatillas.</h3>
+        <h3 class="text-h6 text-grey">{{ $t('shop_no_results') }}</h3>
       </v-col>
     </v-row>
 
-    <!-- Product Grid -->
     <v-row v-else>
       <v-col 
         v-for="product in filteredProducts" 
@@ -99,7 +119,7 @@ const getCategoryName = (categoryId: number) => {
           </v-card-item>
 
           <v-card-text class="pt-0 text-truncate text-medium-emphasis flex-grow-1">
-            {{ product.description || 'Sin descripción disponible.' }}
+            {{ product.description || $t('shop_no_description') }}
           </v-card-text>
 
           <v-card-actions class="px-4 pb-4 mt-auto">
@@ -109,8 +129,9 @@ const getCategoryName = (categoryId: number) => {
               block 
               prepend-icon="mdi-cart-plus"
               :disabled="product.stock <= 0"
+              @click="cartStore.addToCart({ productId: product.id, productName: product.name, unitPrice: product.price, image: product.image })"
             >
-              {{ product.stock > 0 ? 'Añadir al Carrito' : 'Agotado' }}
+              {{ product.stock > 0 ? $t('shop_add_to_cart') : $t('shop_out_of_stock') }}
             </v-btn>
           </v-card-actions>
         </v-card>

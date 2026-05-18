@@ -11,5 +11,4 @@
 </template>
 
 <script setup lang="ts">
-// SimpleCentered layout for Auth
 </script>

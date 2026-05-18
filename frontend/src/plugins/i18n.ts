@@ -42,7 +42,50 @@ const messages = {
         validation_stock_required: 'El stock es obligatorio',
         validation_stock_min: 'El stock no puede ser negativo',
         validation_stock_integer: 'El stock debe ser un número entero',
-        validation_category_required: 'La colección es obligatoria'
+        validation_category_required: 'La colección es obligatoria',
+
+        shop_title: 'Catálogo Web',
+        shop_search_placeholder: 'Buscar zapatillas...',
+        shop_no_results: 'No se encontraron zapatillas.',
+        shop_add_to_cart: 'Añadir al Carrito',
+        shop_out_of_stock: 'Agotado',
+        shop_go_home: 'Inicio',
+        shop_my_orders: 'Mis Pedidos',
+        shop_cart_btn: 'Carrito',
+        shop_no_description: 'Sin descripción disponible.',
+
+        cart_title: 'Mi Carrito',
+        cart_keep_shopping: 'Seguir comprando',
+        cart_empty_title: 'Tu carrito está vacío.',
+        cart_go_to_shop: 'Ir a la Tienda',
+        cart_unit_price: '€ / unidad',
+        cart_clear: 'Vaciar carrito',
+        cart_order_summary: 'Resumen del Pedido',
+        cart_total: 'Total',
+        cart_confirm_order: 'Confirmar Pedido',
+        cart_checkout_success: '¡Pedido realizado con éxito! Redirigiendo...',
+        cart_checkout_error_default: 'Error al procesar el pedido.',
+        cart_confirm_dialog_title: '¿Confirmar pedido?',
+        cart_confirm_dialog_text: '¿Estás seguro de que quieres confirmar el pedido? Esta acción no se puede deshacer.',
+        cart_confirm_yes: 'Sí, confirmar',
+        cart_confirm_no: 'No, volver',
+
+        orders_title: 'Mis Pedidos',
+        orders_back_to_shop: 'Volver a la Tienda',
+        orders_empty_title: 'Aún no has realizado ningún pedido.',
+        orders_start_shopping: '¡Empieza a comprar!',
+        orders_order_number: 'Pedido #',
+        orders_order_total: 'Total del pedido',
+        orders_qty_x_price: '× {price} €',
+
+        order_status_pending: 'Pendiente',
+        order_status_processing: 'Procesando',
+        order_status_shipped: 'Enviado',
+        order_status_delivered: 'Entregado',
+        order_status_cancelled: 'Cancelado',
+
+        manage_orders: 'Gestión de Pedidos',
+        admin_orders: 'Pedidos'
     },
     en: {
         welcome: 'Welcome to SneakerDrop',
@@ -85,13 +128,56 @@ const messages = {
         validation_stock_required: 'Stock is required',
         validation_stock_min: 'Stock cannot be negative',
         validation_stock_integer: 'Stock must be an integer',
-        validation_category_required: 'Collection is required'
+        validation_category_required: 'Collection is required',
+
+        shop_title: 'Web Catalogue',
+        shop_search_placeholder: 'Search sneakers...',
+        shop_no_results: 'No sneakers found.',
+        shop_add_to_cart: 'Add to Cart',
+        shop_out_of_stock: 'Out of Stock',
+        shop_go_home: 'Home',
+        shop_my_orders: 'My Orders',
+        shop_cart_btn: 'Cart',
+        shop_no_description: 'No description available.',
+
+        cart_title: 'My Cart',
+        cart_keep_shopping: 'Keep shopping',
+        cart_empty_title: 'Your cart is empty.',
+        cart_go_to_shop: 'Go to Shop',
+        cart_unit_price: '€ / unit',
+        cart_clear: 'Clear cart',
+        cart_order_summary: 'Order Summary',
+        cart_total: 'Total',
+        cart_confirm_order: 'Confirm Order',
+        cart_checkout_success: 'Order placed successfully! Redirecting...',
+        cart_checkout_error_default: 'Error processing the order.',
+        cart_confirm_dialog_title: 'Confirm order?',
+        cart_confirm_dialog_text: 'Are you sure you want to confirm the order? This action cannot be undone.',
+        cart_confirm_yes: 'Yes, confirm',
+        cart_confirm_no: 'No, go back',
+
+        orders_title: 'My Orders',
+        orders_back_to_shop: 'Back to Shop',
+        orders_empty_title: 'You have not placed any orders yet.',
+        orders_start_shopping: 'Start shopping!',
+        orders_order_number: 'Order #',
+        orders_order_total: 'Order total',
+        orders_qty_x_price: '× {price} €',
+
+        order_status_pending: 'Pending',
+        order_status_processing: 'Processing',
+        order_status_shipped: 'Shipped',
+        order_status_delivered: 'Delivered',
+        order_status_cancelled: 'Cancelled',
+
+        manage_orders: 'Order Management',
+        admin_orders: 'Orders'
     }
 };
 
 const i18n = createI18n({
-    legacy: false, // Use Composition API
-    locale: 'es', // Default locale
+    legacy: false,
+    locale: 'es',
     fallbackLocale: 'en',
     messages,
 });

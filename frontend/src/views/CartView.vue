@@ -15,17 +15,14 @@ const checkoutError = ref('');
 const checkoutSuccess = ref(false);
 const confirmDialog = ref(false);
 
-// abre el diálogo de confirmación
 function openConfirmDialog() {
     confirmDialog.value = true;
 }
 
-// El usuario pulsó "No, volver"
 function cancelCheckout() {
     confirmDialog.value = false;
 }
 
-// El usuario pulsó "Sí, confirmar"
 async function handleCheckout() {
     confirmDialog.value = false;
     checkingOut.value = true;
@@ -34,7 +31,6 @@ async function handleCheckout() {
     try {
         await orderStore.checkoutCart();
         checkoutSuccess.value = true;
-        // hacemos la redirección a la página de los pedidos del usuario
         setTimeout(() => router.push('/my-orders'), 2000);
     } catch (err: any) {
         checkoutError.value = err.message || t('cart_checkout_error_default');
@@ -56,7 +52,6 @@ async function handleCheckout() {
             </v-btn>
         </div>
 
-        <!-- Estado de carrito vacío -->
         <div v-if="cartStore.items.length === 0" class="text-center py-16">
             <v-icon size="80" color="grey-lighten-1">mdi-cart-off</v-icon>
             <h3 class="text-h6 text-grey mt-4">{{ $t('cart_empty_title') }}</h3>
@@ -65,9 +60,7 @@ async function handleCheckout() {
             </v-btn>
         </div>
 
-        <!-- Carrito con productos -->
         <v-row v-else>
-            <!-- Lista de productos (columna izquierda) -->
             <v-col cols="12" lg="8">
                 <v-card variant="outlined">
                     <v-list lines="two">
@@ -91,7 +84,6 @@ async function handleCheckout() {
 
                                 <template v-slot:append>
                                     <div class="d-flex align-center ga-2">
-                                        <!-- Quantity controls -->
                                         <v-btn
                                             icon="mdi-minus"
                                             size="small"
@@ -140,7 +132,6 @@ async function handleCheckout() {
                 </v-card>
             </v-col>
 
-            <!-- Resumen del pedido (columna derecha) -->
             <v-col cols="12" lg="4">
                 <v-card variant="outlined">
                     <v-card-title class="pa-4">{{ $t('cart_order_summary') }}</v-card-title>
@@ -175,7 +166,6 @@ async function handleCheckout() {
                         </v-btn>
                     </v-card-actions>
 
-                    <!-- Mensaje de éxito -->
                     <v-alert
                         v-if="checkoutSuccess"
                         type="success"
@@ -187,7 +177,6 @@ async function handleCheckout() {
                         {{ $t('cart_checkout_success') }}
                     </v-alert>
 
-                    <!-- Mensaje de error -->
                     <v-alert
                         v-if="checkoutError"
                         type="error"
@@ -201,7 +190,6 @@ async function handleCheckout() {
             </v-col>
         </v-row>
 
-        <!-- Diálogo de confirmación -->
         <v-dialog v-model="confirmDialog" max-width="420" persistent>
             <v-card rounded="lg">
                 <v-card-title class="d-flex align-center ga-2 pt-5 px-5">

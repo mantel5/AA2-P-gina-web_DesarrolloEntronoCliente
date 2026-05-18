@@ -1,10 +1,9 @@
 const OrderModel = require('../models/order.model');
 
 const OrderController = {
-    // POST /api/orders — User places an order from their cart
     create: (req, res) => {
         const { items, total } = req.body;
-        const userId = req.userId; // Injected by auth middleware
+        const userId = req.userId;
 
         try {
             if (!items || items.length === 0) {
@@ -21,7 +20,6 @@ const OrderController = {
         }
     },
 
-    // GET /api/orders/my — User gets their own order history
     getMyOrders: (req, res) => {
         const userId = req.userId;
         try {
@@ -32,7 +30,6 @@ const OrderController = {
         }
     },
 
-    // GET /api/orders — Admin gets all orders in the system
     getAll: (req, res) => {
         try {
             const orders = OrderModel.findAll();
@@ -42,7 +39,6 @@ const OrderController = {
         }
     },
 
-    // PUT /api/orders/:id/status — Admin updates an order's status
     updateStatus: (req, res) => {
         const { status } = req.body;
         const validStatuses = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];

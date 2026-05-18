@@ -58,7 +58,6 @@ const getCategoryName = (categoryId: number) => {
       </div>
     </div>
 
-    <!-- Barra de búsqueda -->
     <v-row>
       <v-col cols="12" md="6" lg="4">
         <v-text-field
@@ -87,7 +86,6 @@ const getCategoryName = (categoryId: number) => {
       </v-col>
     </v-row>
 
-    <!-- Grid de productos -->
     <v-row v-else>
       <v-col 
         v-for="product in filteredProducts" 

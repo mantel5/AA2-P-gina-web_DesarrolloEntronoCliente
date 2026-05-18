@@ -44,7 +44,6 @@ const messages = {
         validation_stock_integer: 'El stock debe ser un número entero',
         validation_category_required: 'La colección es obligatoria',
 
-        // --- Tienda / Shop ---
         shop_title: 'Catálogo Web',
         shop_search_placeholder: 'Buscar zapatillas...',
         shop_no_results: 'No se encontraron zapatillas.',
@@ -55,7 +54,6 @@ const messages = {
         shop_cart_btn: 'Carrito',
         shop_no_description: 'Sin descripción disponible.',
 
-        // --- Carrito ---
         cart_title: 'Mi Carrito',
         cart_keep_shopping: 'Seguir comprando',
         cart_empty_title: 'Tu carrito está vacío.',
@@ -72,7 +70,6 @@ const messages = {
         cart_confirm_yes: 'Sí, confirmar',
         cart_confirm_no: 'No, volver',
 
-        // --- Mis Pedidos ---
         orders_title: 'Mis Pedidos',
         orders_back_to_shop: 'Volver a la Tienda',
         orders_empty_title: 'Aún no has realizado ningún pedido.',
@@ -81,14 +78,12 @@ const messages = {
         orders_order_total: 'Total del pedido',
         orders_qty_x_price: '× {price} €',
 
-        // --- Estados de pedido ---
         order_status_pending: 'Pendiente',
         order_status_processing: 'Procesando',
         order_status_shipped: 'Enviado',
         order_status_delivered: 'Entregado',
         order_status_cancelled: 'Cancelado',
 
-        // --- Admin: Pedidos ---
         manage_orders: 'Gestión de Pedidos',
         admin_orders: 'Pedidos'
     },
@@ -135,7 +130,6 @@ const messages = {
         validation_stock_integer: 'Stock must be an integer',
         validation_category_required: 'Collection is required',
 
-        // --- Shop ---
         shop_title: 'Web Catalogue',
         shop_search_placeholder: 'Search sneakers...',
         shop_no_results: 'No sneakers found.',
@@ -146,7 +140,6 @@ const messages = {
         shop_cart_btn: 'Cart',
         shop_no_description: 'No description available.',
 
-        // --- Cart ---
         cart_title: 'My Cart',
         cart_keep_shopping: 'Keep shopping',
         cart_empty_title: 'Your cart is empty.',
@@ -163,7 +156,6 @@ const messages = {
         cart_confirm_yes: 'Yes, confirm',
         cart_confirm_no: 'No, go back',
 
-        // --- My Orders ---
         orders_title: 'My Orders',
         orders_back_to_shop: 'Back to Shop',
         orders_empty_title: 'You have not placed any orders yet.',
@@ -172,14 +164,12 @@ const messages = {
         orders_order_total: 'Order total',
         orders_qty_x_price: '× {price} €',
 
-        // --- Order statuses ---
         order_status_pending: 'Pending',
         order_status_processing: 'Processing',
         order_status_shipped: 'Shipped',
         order_status_delivered: 'Delivered',
         order_status_cancelled: 'Cancelled',
 
-        // --- Admin: Orders ---
         manage_orders: 'Order Management',
         admin_orders: 'Orders'
     }

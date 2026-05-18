@@ -8,8 +8,7 @@ export const useAuthStore = defineStore('auth', () => {
     let parsedUser = null;
     try {
         parsedUser = storedUser ? JSON.parse(storedUser) : null;
-    } catch (e) {
-        console.error('Error parsing stored user:', e);
+    } catch {
         localStorage.removeItem('user');
     }
 
@@ -19,9 +18,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     async function login(credentials: any) {
         try {
-            console.log('Attempting login with username:', credentials.username);
             const data: any = await HttpClient.post('/auth/login', credentials);
-            console.log('Login response received:', data);
 
             if (!data.token || !data.user) {
                 throw new Error('Invalid response structure from server');
@@ -32,7 +29,6 @@ export const useAuthStore = defineStore('auth', () => {
             localStorage.setItem('user', JSON.stringify(data.user));
             localStorage.setItem('token', data.token);
         } catch (error) {
-            console.error('Login action error:', error);
             throw error;
         }
     }

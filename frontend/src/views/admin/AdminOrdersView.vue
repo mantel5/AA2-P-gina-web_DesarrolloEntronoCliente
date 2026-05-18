@@ -22,7 +22,6 @@ const statusLabel: Record<string, string> = {
     cancelled: 'Cancelado',
 };
 
-// Tracks which order's detail panel is expanded
 const expandedOrderId = ref<number | null>(null);
 
 function toggleExpand(orderId: number) {
@@ -48,12 +47,10 @@ onMounted(() => {
             <p class="text-medium-emphasis mt-1">Visualiza y actualiza el estado de todos los pedidos de la tienda.</p>
         </div>
 
-        <!-- Loading -->
         <div v-if="orderStore.loading" class="text-center py-12">
             <v-progress-circular indeterminate color="primary" size="64" />
         </div>
 
-        <!-- No orders -->
         <v-alert
             v-else-if="orderStore.orders.length === 0"
             type="info"
@@ -62,11 +59,9 @@ onMounted(() => {
             text="Todavía no se ha realizado ningún pedido en la tienda."
         />
 
-        <!-- Orders table -->
         <v-card v-else variant="outlined">
             <v-list>
                 <template v-for="order in orderStore.orders" :key="order.id">
-                    <!-- Order row -->
                     <v-list-item
                         :title="`Pedido #${order.id} — ${order.username}`"
                         :subtitle="new Date(order.createdAt).toLocaleString('es-ES')"
@@ -79,7 +74,6 @@ onMounted(() => {
                                     {{ order.total.toFixed(2) }} €
                                 </span>
 
-                                <!-- Status selector (stops click from toggling the row) -->
                                 <v-select
                                     :model-value="order.status"
                                     :items="ORDER_STATUSES"
@@ -115,7 +109,6 @@ onMounted(() => {
                         </template>
                     </v-list-item>
 
-                    <!-- Expandable items detail -->
                     <v-expand-transition>
                         <div v-if="expandedOrderId === order.id">
                             <v-divider />

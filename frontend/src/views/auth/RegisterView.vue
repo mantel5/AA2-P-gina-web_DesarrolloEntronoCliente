@@ -35,7 +35,6 @@
       </v-form>
     </v-card-text>
     <v-card-actions>
-       <!-- Button moved safely inside form -->
     </v-card-actions>
     <v-alert v-if="apiError" type="error" class="mt-3">{{ apiError }}</v-alert>
   </v-card>
@@ -48,9 +47,6 @@ import * as yup from 'yup';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '../../stores/auth';
 
-// ... (other imports)
-
-// Validation Schema
 const schema = yup.object({
   username: yup.string().required('El usuario es obligatorio').min(3, 'Mínimo 3 caracteres'),
   password: yup.string().required('La contraseña es obligatoria').min(6, 'Mínimo 6 caracteres'),

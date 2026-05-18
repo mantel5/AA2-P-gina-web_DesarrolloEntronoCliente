@@ -4,7 +4,6 @@ import { useOrderStore } from '../stores/order';
 
 const orderStore = useOrderStore();
 
-// Map backend status strings to display-friendly chip colours
 const statusColor: Record<string, string> = {
     pending: 'orange',
     processing: 'blue',
@@ -38,14 +37,12 @@ onMounted(() => {
             </v-btn>
         </div>
 
-        <!-- Loading skeleton -->
         <v-row v-if="orderStore.loading">
             <v-col cols="12" class="text-center py-12">
                 <v-progress-circular indeterminate color="primary" size="64" />
             </v-col>
         </v-row>
 
-        <!-- No orders yet -->
         <div v-else-if="orderStore.orders.length === 0" class="text-center py-16">
             <v-icon size="80" color="grey-lighten-1">mdi-package-variant-closed-remove</v-icon>
             <h3 class="text-h6 text-grey mt-4">Aún no has realizado ningún pedido.</h3>
@@ -54,7 +51,6 @@ onMounted(() => {
             </v-btn>
         </div>
 
-        <!-- Order list -->
         <v-row v-else>
             <v-col
                 v-for="order in orderStore.orders"

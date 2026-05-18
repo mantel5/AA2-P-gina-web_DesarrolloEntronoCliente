@@ -5,7 +5,6 @@ const OrderController = require('../controllers/order.controller');
 
 const SECRET_KEY = process.env.JWT_SECRET || 'supersecretkey';
 
-// Auth middleware: verifies the JWT and injects userId + userRole into req
 const authenticate = (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -22,7 +21,6 @@ const authenticate = (req, res, next) => {
     }
 };
 
-// Admin-only middleware
 const requireAdmin = (req, res, next) => {
     if (req.userRole !== 'admin') {
         return res.status(403).json({ error: 'Forbidden: Admin access required' });
@@ -30,11 +28,9 @@ const requireAdmin = (req, res, next) => {
     next();
 };
 
-// User routes (require authentication)
 router.post('/', authenticate, OrderController.create);
 router.get('/my', authenticate, OrderController.getMyOrders);
 
-// Admin routes (require authentication + admin role)
 router.get('/', authenticate, requireAdmin, OrderController.getAll);
 router.put('/:id/status', authenticate, requireAdmin, OrderController.updateStatus);
 

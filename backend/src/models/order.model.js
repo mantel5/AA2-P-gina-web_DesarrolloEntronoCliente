@@ -1,7 +1,6 @@
 const db = require('../database');
 
 const OrderModel = {
-    // Creates a new order with its items in a single transaction
     create: (userId, items, total) => {
         const createOrder = db.transaction(() => {
             const orderStmt = db.prepare(
@@ -23,7 +22,6 @@ const OrderModel = {
         return OrderModel.findById(orderId);
     },
 
-    // Find a single order with its items
     findById: (orderId) => {
         const order = db.prepare('SELECT * FROM orders WHERE id = ?').get(orderId);
         if (!order) return null;
@@ -31,7 +29,6 @@ const OrderModel = {
         return order;
     },
 
-    // Find all orders for a specific user (with their items)
     findByUserId: (userId) => {
         const orders = db.prepare('SELECT * FROM orders WHERE userId = ? ORDER BY createdAt DESC').all(userId);
         return orders.map(order => {
@@ -40,7 +37,6 @@ const OrderModel = {
         });
     },
 
-    // Find all orders in the system (admin view), joining username
     findAll: () => {
         const orders = db.prepare(`
             SELECT o.*, u.username
@@ -54,7 +50,6 @@ const OrderModel = {
         });
     },
 
-    // Update the status of an order
     updateStatus: (orderId, status) => {
         return db.prepare('UPDATE orders SET status = ? WHERE id = ?').run(status, orderId);
     }

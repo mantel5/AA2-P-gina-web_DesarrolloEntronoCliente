@@ -1,4 +1,5 @@
 import '@mdi/font/css/materialdesignicons.css'
+// @ts-ignore
 import 'vuetify/styles'
 
 import { createVuetify } from 'vuetify'

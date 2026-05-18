@@ -124,7 +124,6 @@ const filteredProducts = computed(() => {
   );
 });
 
-// Validation Schema
 const schema = yup.object({
   name: yup.string().required(t('validation_name_required')).min(3, t('validation_name_min')),
   price: yup.number().required(t('validation_price_required')).min(0, t('validation_price_min')),
@@ -186,7 +185,7 @@ const save = handleSubmit(async (values) => {
     cancelButtonColor: '#d33',
     confirmButtonText: 'Sí, guardar',
     cancelButtonText: 'Cancelar',
-    background: '#455A64', // Darker gray (Secondary)
+    background: '#455A64',
     color: '#ffffff'
   });
 
@@ -206,8 +205,7 @@ const save = handleSubmit(async (values) => {
         background: '#455A64',
         color: '#ffffff'
       });
-    } catch (error) {
-      console.error('Error saving product:', error);
+    } catch {
       Swal.fire({
         title: 'Error',
         text: 'Hubo un problema al guardar el producto.',
@@ -230,7 +228,7 @@ const deleteProduct = async (id: number) => {
     cancelButtonColor: '#d33',
     confirmButtonText: 'Sí, borrar',
     cancelButtonText: 'Cancelar',
-    background: '#455A64', // Darker gray (Secondary)
+    background: '#455A64',
     color: '#ffffff'
   });
 
@@ -241,7 +239,7 @@ const deleteProduct = async (id: number) => {
       text: 'El producto ha sido eliminado.',
       icon: 'success',
       confirmButtonColor: '#00E5FF',
-      background: '#455A64', // Darker gray
+      background: '#455A64',
       color: '#ffffff'
     });
   }

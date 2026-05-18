@@ -67,7 +67,6 @@ const categoryStore = useCategoryStore();
 const dialog = ref(false);
 const editedId = ref<number | null>(null);
 
-// Validation Schema
 const schema = yup.object({
   name: yup.string().required(t('validation_name_required')).min(3, t('validation_name_min')),
   description: yup.string().nullable()
@@ -114,7 +113,7 @@ const save = handleSubmit(async (values) => {
     cancelButtonColor: '#d33',
     confirmButtonText: 'Sí, guardar',
     cancelButtonText: 'Cancelar',
-    background: '#455A64', // Darker gray
+    background: '#455A64',
     color: '#ffffff'
   });
 
@@ -134,8 +133,7 @@ const save = handleSubmit(async (values) => {
         background: '#455A64',
         color: '#ffffff'
       });
-    } catch (error) {
-      console.error('Error saving category:', error);
+    } catch {
       Swal.fire({
         title: 'Error',
         text: 'Hubo un problema al guardar la colección.',
@@ -147,10 +145,6 @@ const save = handleSubmit(async (values) => {
     }
   }
 });
-
-
-
-// ... existing code ...
 
 const deleteCategory = async (id: number) => {
   const result = await Swal.fire({
